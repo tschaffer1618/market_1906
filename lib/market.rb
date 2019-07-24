@@ -38,6 +38,23 @@ class Market
     hash
   end
 
+  def sell(item, amount)
+    if total_inventory[item] < amount
+      false
+    else
+      amount_left = amount
+      @vendors.each do |vendor|
+        if amount_left > vendor.inventory[item]
+          amount_left -= vendor.inventory[item]
+          vendor.inventory[item] = 0
+        else
+          vendor.inventory[item] -= amount_left
+        end
+      end
+      true
+    end
+  end
+
 
 
 end
