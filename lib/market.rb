@@ -21,21 +21,17 @@ class Market
   def sorted_item_list
     items = []
     @vendors.each do |vendor|
-      vendor.inventory.keys.each do |item|
-        items << item
-      end
+      vendor.inventory.keys.each { |item| items << item }
     end
     items.sort.uniq
   end
 
   def total_inventory
-    hash = Hash.new(0)
+    inventory = Hash.new(0)
     @vendors.each do |vendor|
-      vendor.inventory.each do |item, amount|
-        hash[item] += amount
-      end
+      vendor.inventory.each { |item, amount| inventory[item] += amount }
     end
-    hash
+    inventory
   end
 
   def sell(item, amount)
@@ -54,7 +50,4 @@ class Market
       true
     end
   end
-
-
-
 end
